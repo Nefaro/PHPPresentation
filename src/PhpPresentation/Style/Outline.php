@@ -59,7 +59,7 @@ class Outline
     }
 
     /**
-     * @return int
+     * @return float
      */
     public function getWidth()
     {
@@ -68,12 +68,12 @@ class Outline
 
     /**
      * Value in points
-     * @param int $width
+     * @param float $width
      * @return Outline
      */
     public function setWidth($width)
     {
-        $this->width = intval($width);
+        $this->width = $width;
         return $this;
     }
 }
