@@ -543,7 +543,9 @@ class PptCharts extends AbstractDecoratorWriter
         $objWriter->endElement();
 
         // Write layout
-        $this->writeLayout($objWriter, $subject);
+        if ( $subject->isManaulLayout() ) {
+        	$this->writeLayout($objWriter, $subject);
+        }
 
         // c:overlay
         $objWriter->startElement('c:overlay');

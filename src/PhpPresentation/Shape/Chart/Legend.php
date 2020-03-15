@@ -106,6 +106,13 @@ class Legend implements ComparableInterface
     private $alignment;
 
     /**
+     * Is manual layout
+     *
+     * @var boolean
+     */
+    private $manualLayout = true;
+
+    /**
      * Create a new \PhpOffice\PhpPresentation\Shape\Chart\Legend instance
      */
     public function __construct()
@@ -337,6 +344,28 @@ class Legend implements ComparableInterface
         return $this;
     }
 
+    /**
+     * Should use manual layout
+     *
+     * @return boolean
+     */
+    public function isManaulLayout()
+    {
+    	return $this->manualLayout;
+    }
+    
+    /**
+     * Set manual layout
+     *
+     * @param  boolean                          $value
+     * @return \PhpOffice\PhpPresentation\Shape\Chart\Legend
+     */
+    public function setManualLayout($value = true)
+    {
+    	$this->manualLayout = $value;
+    	return $this;
+    }
+    
     /**
      * Get hash code
      *
