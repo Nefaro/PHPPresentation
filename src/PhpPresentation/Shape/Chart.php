@@ -22,6 +22,8 @@ use PhpOffice\PhpPresentation\Shape\Chart\Legend;
 use PhpOffice\PhpPresentation\Shape\Chart\PlotArea;
 use PhpOffice\PhpPresentation\Shape\Chart\Title;
 use PhpOffice\PhpPresentation\Shape\Chart\View3D;
+use PhpOffice\PhpPresentation\Style\Fill;
+use PhpOffice\PhpPresentation\Style\Outline;
 
 /**
  * Chart element
@@ -64,6 +66,21 @@ class Chart extends AbstractGraphic implements ComparableInterface
     private $includeSpreadsheet = false;
 
     /**
+     * @var Outline
+     */
+    private $floorOutline;
+    
+    /**
+     * @var Outline
+     */
+    private $sideWallOutline;
+    
+    /**
+     * @var Outline
+     */
+    private $backWallOutline;
+    
+    /**
      * Create a new Chart
      */
     public function __construct()
@@ -86,6 +103,18 @@ class Chart extends AbstractGraphic implements ComparableInterface
         $this->legend    = clone $this->legend;
         $this->plotArea  = clone $this->plotArea;
         $this->view3D    = clone $this->view3D;
+        
+        if (is_object($this->floorOutline)) {
+        	$this->floorOutline = clone $this->floorOutline;
+        }
+        
+        if (is_object($this->sideWallOutline)) {
+        	$this->sideWallOutline = clone $this->sideWallOutline;
+        }
+        
+        if (is_object($this->backWallOutline)) {
+        	$this->backWallOutline = clone $this->backWallOutline;
+        }
     }
 
     /**
@@ -161,12 +190,66 @@ class Chart extends AbstractGraphic implements ComparableInterface
     }
 
     /**
+     * @return Outline
+     */
+    public function getFloorOutline()
+    {
+    	return $this->floorOutline;
+    }
+    
+    /**
+     * @param Outline $fill
+     * @return Chart
+     */
+    public function setFloorFill(Outline $outline)
+    {
+    	$this->floorOutline = $outline;
+    	return $this;
+    }
+    
+    /**
+     * @return Outline
+     */
+    public function getSideWallOutline()
+    {
+    	return $this->sideWallOutline;
+    }
+    
+    /**
+     * @param Outline $fill
+     * @return Chart
+     */
+    public function setSideWallOutline(Outline $outline)
+    {
+    	$this->sideWallOutline = $outline;
+    	return $this;
+    }
+    
+    /**
+     * @return Outline
+     */
+    public function getBackWallOutline()
+    {
+    	return $this->backWallOutline;
+    }
+    
+    /**
+     * @param Outline $fill
+     * @return Chart
+     */
+    public function setBackWallOutline(Outline $outline)
+    {
+    	$this->backWallOutline = $outline;
+    	return $this;
+    }
+    
+    /**
      * Get hash code
      *
      * @return string Hash code
      */
     public function getHashCode()
     {
-        return md5(parent::getHashCode() . $this->title->getHashCode() . $this->legend->getHashCode() . $this->plotArea->getHashCode() . $this->view3D->getHashCode() . ($this->includeSpreadsheet ? 1 : 0) . __CLASS__);
+    	return md5(parent::getHashCode() . $this->title->getHashCode() . $this->legend->getHashCode() . $this->plotArea->getHashCode() . $this->view3D->getHashCode() . ($this->includeSpreadsheet ? 1 : 0) . __CLASS__);
     }
 }

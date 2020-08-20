@@ -84,6 +84,42 @@ class PptCharts extends AbstractDecoratorWriter
         // c:chart
         $objWriter->startElement('c:chart');
 
+        // c:floor
+        if (is_object($chart->getFloorOutline())) {
+        	$objWriter->startElement('c:floor');
+        	// c:spPr
+        	$objWriter->startElement('c:spPr');
+        	// Write outline
+        	$this->writeOutline($objWriter, $chart->getFloorOutline());
+        	// ## c:spPr
+        	$objWriter->endElement();
+        	$objWriter->endElement();
+        }
+        
+        // c:sideWall
+        if (is_object($chart->getSideWallOutline())) {
+        	$objWriter->startElement('c:sideWall');
+        	// c:spPr
+        	$objWriter->startElement('c:spPr');
+        	// Write outline
+        	$this->writeOutline($objWriter, $chart->getSideWallOutline());
+        	// ## c:spPr
+        	$objWriter->endElement();
+        	$objWriter->endElement();
+        }
+        
+        // c:backWall
+        if (is_object($chart->getBackWallOutline())) {
+        	$objWriter->startElement('c:backWall');
+        	// c:spPr
+        	$objWriter->startElement('c:spPr');
+        	// Write outline
+        	$this->writeOutline($objWriter, $chart->getBackWallOutline());
+        	// ## c:spPr
+        	$objWriter->endElement();
+        	$objWriter->endElement();
+        }
+        
         // Title?
         if ($chart->getTitle()->isVisible()) {
             // Write title
